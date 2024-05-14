@@ -1,7 +1,7 @@
 import json
 import pytest
 import datetime
-from app import app, db
+from user_mood.app import app, db
 from user_mood.user_moods.model import Mood
 
 @pytest.fixture

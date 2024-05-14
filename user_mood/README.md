@@ -2,6 +2,10 @@
 This document details the installation, usage, and contribution guidelines for the user_moods_api project.
 
 ## Installation
+### Minimum Requirements
+  - Python 3.12.3
+  - pipenv, version 2023.12.1
+
 Clone the repository:
 
 ```Bash
@@ -24,7 +28,7 @@ pipenv install
 To run the Flask application locally, execute:
 
 ```Bash
-./bootstrap.sh
+flask run
 ```
 
 ## API Documentation

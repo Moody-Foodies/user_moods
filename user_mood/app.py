@@ -11,7 +11,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moods.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://myuser:mypassword@localhost/moods'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize the database
@@ -62,7 +63,9 @@ class MoodAPI(MethodView):
             }
         }
 
-        return jsonify(response_data)
+        json_response = json.dumps(response_data, ensure_ascii=False)
+
+        return json_response
 
     # POST method for adding a new mood entry
     def post(self):
@@ -90,4 +93,4 @@ class MoodAPI(MethodView):
 app.add_url_rule('/moods', view_func=MoodAPI.as_view('mood_api'))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

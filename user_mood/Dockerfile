@@ -1,27 +1,20 @@
-FROM python:3.12-alpine
+# Use an official Python runtime as a parent image
+FROM python:3.12-slim
 
-# Install system dependencies
-RUN apk update && \
-    apk add --no-cache bash
+# Set the working directory
+WORKDIR /app
 
-# Install Pipenv
-RUN pip install --no-cache-dir pipenv
+# Copy the Pipfile and Pipfile.lock into the container
+COPY Pipfile Pipfile.lock /app/
 
-# Set working directory
-WORKDIR /usr/src/app
+# Install pipenv and project dependencies
+RUN pip install pipenv && pipenv install --deploy --ignore-pipfile
 
-# Copy Pipfiles
-COPY Pipfile Pipfile.lock ./
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Install dependencies
-RUN pipenv install --system --deploy
+# Expose the port the app runs on
+EXPOSE 8000
 
-# Copy application code
-COPY user_mood ./user_mood
-COPY bootstrap.sh ./
-
-# Expose port
-EXPOSE 5001
-
-# Set entrypoint
-ENTRYPOINT ["./bootstrap.sh"]
+# Run the app using Gunicorn
+CMD ["pipenv", "run", "gunicorn", "--config", "gunicorn_config.py", "user_mood.app:app"]
