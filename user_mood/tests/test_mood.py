@@ -1,8 +1,9 @@
 # Import necessary modules
 import datetime as dt
 from marshmallow import ValidationError
-from user_moods.schema.moods_schema import MoodSchema
-from user_moods.model.moods import Mood
+from user_moods.schema import MoodSchema
+from user_moods.model import Mood
+from app import db
 
 # Test the MoodSchema class
 def test_mood_schema():
@@ -37,13 +38,14 @@ def test_mood_schema():
 
 # Test the Mood class
 def test_mood_class():
-    # Test current date
-    mood = Mood(mood=3, user_id=1)
-    assert mood.date == dt.date.today()
+    today = dt.date.today()
+    mood = Mood(mood=3, user_id=1, date=today)
+    assert mood.date == today
 
-    # Test specified date
-    mood = Mood(mood=3, user_id=1, date="2024-05-13")
-    assert mood.date == dt.date(2024, 5, 13)
+    specified_date = dt.date(2024, 5, 13)
+    mood = Mood(mood=3, user_id=1, date=specified_date)
+    assert mood.date == specified_date
+
 
 # Run the tests
 test_mood_schema()

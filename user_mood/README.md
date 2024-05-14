@@ -27,6 +27,11 @@ To run the Flask application locally, execute:
 ./bootstrap.sh
 ```
 
+## API Documentation
+
+You can access the Swagger documentation for the API [here](/apidocs).
+
+
 ## Endpoints
 
 `GET /moods`: Retrieves user moods.

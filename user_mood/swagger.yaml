@@ -1,0 +1,92 @@
+swagger: '2.0'
+info:
+  title: User Moods API
+  description: API for managing user moods
+  version: '1.0'
+
+paths:
+  /moods:
+    get:
+      summary: Retrieve mood data for a user
+      description: Returns mood data for a given user_id.
+      parameters:
+        - name: user_id
+          in: query
+          type: integer
+          required: true
+          description: The ID of the user to retrieve mood data for.
+      responses:
+        200:
+          description: A JSON object containing mood data for the specified user.
+          schema:
+            $ref: '#/definitions/MoodResponse'
+        400:
+          description: Bad request if user_id is missing or not an integer.
+        404:
+          description: Not found if no moods are found for the specified user_id.
+    post:
+      summary: Add a new mood entry
+      description: Adds a new mood entry for a user.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/NewMood'
+      responses:
+        201:
+          description: Created if the mood entry is added successfully.
+        400:
+          description: Bad request if required fields are missing or validation fails.
+
+definitions:
+  MoodResponse:
+    type: object
+    properties:
+      data:
+        type: object
+        properties:
+          id:
+            type: integer
+            description: The ID of the user.
+          type:
+            type: string
+            description: The type of data.
+          attributes:
+            type: object
+            properties:
+              avg_mood:
+                type: number
+                format: float
+                description: The average mood of the user.
+              user_moods:
+                type: array
+                items:
+                  $ref: '#/definitions/MoodEntry'
+  MoodEntry:
+    type: object
+    properties:
+      date:
+        type: string
+        format: date
+        description: The date of the mood entry.
+      mood:
+        type: integer
+        description: The mood rating.
+  NewMood:
+    type: object
+    required:
+      - user_id
+      - mood
+      - date
+    properties:
+      user_id:
+        type: integer
+        description: The ID of the user.
+      mood:
+        type: integer
+        description: The mood rating.
+      date:
+        type: string
+        format: date
+        description: The date of the mood entry.

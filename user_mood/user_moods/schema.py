@@ -13,6 +13,6 @@ class MoodSchema(Schema):
     )
     date = fields.Date(format="%Y-%m-%d")
 
-    def validate_date(self, data, **kwargs):
-        if data["date"] > dt.date.today():
+    def validate_date(self, date, **kwargs):
+        if date > dt.date.today():
             raise ValidationError("Date cannot be in the future.")
