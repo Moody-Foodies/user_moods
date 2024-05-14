@@ -3,7 +3,6 @@ import datetime as dt
 from marshmallow import ValidationError
 from user_moods.schema import MoodSchema
 from user_moods.model import Mood
-from app import db
 
 # Test the MoodSchema class
 def test_mood_schema():

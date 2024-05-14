@@ -42,7 +42,7 @@ You can access the Swagger documentation for the API [here](/apidocs).
 The project uses pytest for testing. Run the tests with:
 
 ``` Bash
-pipenv run pytest
+coverage run -m pytest 
 ```
 
 ## Contributing

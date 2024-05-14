@@ -5,14 +5,18 @@ from flask.views import MethodView
 from flasgger import Swagger
 from marshmallow import ValidationError
 from user_mood.user_moods.schema import MoodSchema
-from user_mood.user_moods.model import Mood, db
+from user_mood.user_moods.model import Mood
+from user_mood.user_moods import db
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moods.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Initialize the database
 db.init_app(app)
+
 migrate = Migrate(app, db)
 swagger = Swagger(app, template_file='swagger.yaml')
 
@@ -85,6 +89,5 @@ class MoodAPI(MethodView):
 # Add URL rules for /moods endpoint
 app.add_url_rule('/moods', view_func=MoodAPI.as_view('mood_api'))
 
-# Run the Flask app
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,12 +1,11 @@
-from flask_sqlalchemy import SQLAlchemy
+from user_mood.user_moods import db
 import datetime
-
-db = SQLAlchemy()
 
 def current_date():
     return datetime.datetime.now(datetime.timezone.utc).date()
 
 class Mood(db.Model):
+    __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
     mood = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, nullable=False)
