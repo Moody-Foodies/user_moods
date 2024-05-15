@@ -22,6 +22,6 @@ PyYAML==6.0.1
 referencing==0.35.1
 rpds-py==0.18.1
 six==1.16.0
-SQLAlchemy==2.0.30
+SQLAlchemy
 typing_extensions==4.11.0
 Werkzeug==3.0.3
