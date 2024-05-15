@@ -8,12 +8,10 @@ from marshmallow import ValidationError
 from user_mood.user_moods.schema import MoodSchema
 from user_mood.user_moods.model import Mood
 from user_mood.user_moods import db
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize the database
