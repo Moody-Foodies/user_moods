@@ -5,10 +5,13 @@ from flask import Flask, jsonify, request
 from flask.views import MethodView
 from flasgger import Swagger
 from marshmallow import ValidationError
-from user_mood.user_moods.schema import MoodSchema
-from user_mood.user_moods.model import Mood
-from user_mood.user_moods import db
+from user_moods.schema import MoodSchema
+from user_moods.model import Mood
+from user_moods.database import db
 from flask_migrate import Migrate
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
@@ -92,4 +95,4 @@ class MoodAPI(MethodView):
 app.add_url_rule('/moods', view_func=MoodAPI.as_view('mood_api'))
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)

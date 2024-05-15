@@ -1,14 +1,13 @@
 import json
 import pytest
 import datetime
-from user_mood.app import app, db
-from user_mood.user_moods.model import Mood
+from app import app, db
 
 @pytest.fixture
 def client():
     app.config['TESTING'] = True
     # comment this out for testing
-    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
     with app.test_client() as client:
         with app.app_context():
             db.create_all()  # Create tables
@@ -18,7 +17,7 @@ def client():
 
 def test_get_moods_valid_user_id(client):
     with app.app_context():
-        # Add test data to the in-memory database
+        from user_moods.model import Mood
         db.session.add(Mood(user_id=1, date=datetime.date(2024, 5, 1), mood=4))
         db.session.add(Mood(user_id=1, date=datetime.date(2024, 5, 2), mood=3))
         db.session.commit()

@@ -1,4 +1,4 @@
-from user_mood.user_moods import db
+from user_moods.database import db
 import datetime
 
 def current_date():
