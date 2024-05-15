@@ -9,9 +9,6 @@ from user_moods.schema import MoodSchema
 from user_moods.model import Mood
 from user_moods.database import db
 from flask_migrate import Migrate
-from dotenv import load_dotenv
-
-load_dotenv()
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
