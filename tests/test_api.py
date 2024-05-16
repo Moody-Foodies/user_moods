@@ -7,7 +7,7 @@ from app import app, db
 def client():
     app.config['TESTING'] = True
     # comment this out for testing
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
     with app.test_client() as client:
         with app.app_context():
             db.create_all()  # Create tables

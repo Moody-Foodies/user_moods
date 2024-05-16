@@ -10,6 +10,7 @@ flasgger = "*"
 marshmallow = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
+psycopg2 = "*"
 psycopg2-binary = "*"
 
 [dev-packages]
