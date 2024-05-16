@@ -60,6 +60,7 @@ def test_add_mood(client):
     assert response.status_code == 201
 
     with app.app_context():
+        from user_moods.model import Mood
         mood = Mood.query.filter_by(user_id=1, date=datetime.date(2024, 5, 5)).first()
         assert mood is not None
         assert mood.mood == 3
